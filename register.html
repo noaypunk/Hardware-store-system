@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="gui.css">
+</head>
+<body>
+  <header>
+    <img src="C:\Users\parsival\OneDrive\Desktop\file error 404\2025-CIT\IM 1\Hardware store management system/banner.jpg" alt="Banner" class="banner">
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>User Registration</h2>
+    <form action="#" method="POST" class="form-box">
+
+      <label for="usertype">Register as:</label>
+      <select id="usertype" name="userType">
+        <option></option>
+        <option value="guest">Guest</option>
+        <option value="contractor">Contractor</option>
+        <option value="engineer">Engineer</option>
+        <option value="poorman">Poorman</option>
+        <option value="government employee">Government employee</option>
+      </select>
+
+      <label for="name">Full Name:</label>
+      <input type="text" placeholder="First name & Last name" id="name" name="name" required>
+
+      <label for="phoneno">Contact Number:</label>
+      <input type="number" placeholder="09XXXXXXXXX" id="phoneno" name="phoneno" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      
+      <label for="confirm password">Confirm Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <button type="submit"><a href="login.html">Register</a></button>
+    </form>
+  </main>
+
+  <footer>
+    <p>© 2025 My Project</p>
+  </footer>
+</body>
+</html>
