@@ -1,118 +1,191 @@
-body, h1, h2, p, ul, li, form {
+:root {
+  --primary: #f57c00;
+  --secondary: #2f2f2f;
+  --light: #f7f7f7;
+  --white: #ffffff;
+}
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f4f9;
-  color: #333;
-  line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  background-color: var(--light);
+  color: var(--secondary);
 }
 
 .banner {
-  width: 75%;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.banner img {
+  width: 100%;
   height: 180px;
   object-fit: cover;
-  display: block;
-  margin: 0 auto;
+  opacity: 0.8;
 }
 
 nav {
-  background: #333;
-}
-nav ul {
+  background-color: var(--secondary);
   display: flex;
   justify-content: center;
-  list-style: none;
+  padding: 8px 0;
 }
-nav ul li {
-  margin: 0 15px;
-}
-nav ul li a {
-  color: white;
+nav a {
+  color: var(--white);
   text-decoration: none;
-  font-weight: bold;
-}
-nav ul li a:hover {
-  text-decoration: underline;
-}
-
-main {
-  flex: 1;
-  padding: 20px;
-  text-align: center;
+  margin: 0 18px;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
-.form-box {
-  max-width: 400px;
-  margin: 20px auto;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+nav a:hover {
+  color: var(--primary);
 }
-.form-box label {
-  display: block;
-  margin-top: 10px;
-  text-align: left;
-}
-.form-box input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-.form-box select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-.form-box button {
-  margin-top: 15px;
-  padding: 10px;
-  width: 100%;
-  background: #333;
+
+nav a.active {
+  background-color: #ff8800;
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 4px;
+  padding: 0 5px 0 5px;
 }
-.form-box button:hover {
-  background: #555;
+
+.content {
+  text-align: center;
+  padding: 50px 20px;
+}
+.content-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
 }
 
 footer {
-  background: #333;
-  color: white;
+  background-color: var(--secondary);
+  color: var(--white);
   text-align: center;
   padding: 15px;
+  margin-top: 250px;
+  font-size: 0.9rem;
 }
 
-details summary {
-  cursor: pointer;
-  padding: 10px;
-  background: #ee7320;
-  color: rgb(255, 255, 255);
+@media (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+  nav a {
+    margin: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 6% auto;
+  padding: 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: slideIn 0.3s ease;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 24px;
+  padding-left: 15px;
   font-weight: bold;
+  cursor: pointer;
+}
+.close:hover {
+  color: var(--primary);
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+.tab {
+  flex: 1;
+  padding: 10px;
+  background-color: #eee;
   border: none;
-  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.tab.active {
+  background-color: var(--primary);
+  color: white;
+}
+
+.form-section {
+  display: none;
+  flex-direction: column;
+}
+.form-section.active {
+  display: flex;
+}
+
+.form-section h2 {
   text-align: center;
-  list-style: none;
-  display: block;
+  margin-bottom: 10px;
+  color: var(--secondary);
 }
 
-details summary::-webkit-details-marker {
-  display: none;
+.form-section label {
+  margin-top: 10px;
 }
 
-details summary::marker {
-  display: none;
+.form-section input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-section select {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-section button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+.form-section button:hover {
+  background-color: #d86500;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
