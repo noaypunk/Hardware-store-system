@@ -1,0 +1,125 @@
+.gallery {
+  text-align: center;
+  padding: 50px 20px;
+  background: #f9f9f9;
+}
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  justify-content: center;
+}
+
+.item {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(255, 136, 0, 0.4);
+}
+
+.item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 8% auto;
+  padding: 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  position: relative;
+  animation: slideDown 0.3s ease;
+}
+
+.modal-content img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.modal-content h2 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.modal-content .price {
+  color: #ff7a00;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.modal-content p {
+  font-size: 15px;
+  color: #555;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal-buttons button {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.add-cart {
+  background-color: #ff7a00;
+  color: #fff;
+}
+
+.add-cart:hover {
+  background-color: #e06900;
+}
+
+.buy-now {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.buy-now:hover {
+  background-color: #005fcc;
+}
+
+.close {
+  position: absolute;
+  top: 10px; right: 15px;
+  color: #333;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
