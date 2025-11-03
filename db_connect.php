@@ -1,11 +1,14 @@
 <?php
-$servername = "localhost";
-$username = "root"; 
-$password = ""; 
-$dbname = "hardware_db"; 
+$servername = getenv("MYSQLHOST") ?: "localhost";
+$username   = getenv("MYSQLUSER") ?: "root";
+$password   = getenv("MYSQLPASSWORD") ?: "";
+$dbname     = getenv("MYSQLDATABASE") ?: "hardware_db";
+$port       = getenv("MYSQLPORT") ?: 3306;
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
+// Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
