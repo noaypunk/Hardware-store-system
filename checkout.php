@@ -9,7 +9,7 @@
 <body>
   <header>
     <h1>🛒 Checkout</h1>
-    <a href="gallery.html" class="back-btn">← Back to Shop</a>
+    <a href="gallery.php" class="back-btn">← Back to Shop</a>
   </header>
 
   <main>

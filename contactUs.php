@@ -10,15 +10,15 @@
 <body>
 
   <div class="banner">
-    <img src="hardware-banner.jpg" alt="Hardware Store Banner">
+    <img src="resources/hardware-banner.jpg" alt="Hardware Store Banner">
   </div>
 
 
   <nav>
     <a href="#" id="accountBtn">My Account</a>
-    <a href="index.html">Home</a>
-    <a href="gallery.html">Shop</a>
-    <a href="contactUs.html" class="active">Contact Us</a>
+    <a href="index.php">Home</a>
+    <a href="gallery.php">Shop</a>
+    <a href="contactUs.php" class="active">Contact Us</a>
   </nav>
 
 

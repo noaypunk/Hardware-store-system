@@ -1,0 +1,83 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at center, #0a0f24, #000);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+h1 {
+  color: #00ffff;
+  font-size: 2.5rem;
+  text-shadow: 0 0 15px #00ffff;
+}
+
+.welcome a {
+  color: #ff0077;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.form-container, .table-container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #00ffff33;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 30px auto;
+  box-shadow: 0 0 30px #00ffff22;
+  transition: all 0.3s ease-in-out;
+}
+
+input, button {
+  margin: 8px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+input {
+  width: 250px;
+  background: #1c1f2b;
+  color: #fff;
+  border: 1px solid #00ffff33;
+}
+
+button {
+  background: linear-gradient(90deg, #00ffff, #ff00c3);
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+table {
+  width: 90%;
+  margin: auto;
+  border-collapse: collapse;
+  color: #fff;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #00ffff44;
+}
+
+tr:hover {
+  background: #00ffff11;
+}
+
+img {
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ffff66;
+}

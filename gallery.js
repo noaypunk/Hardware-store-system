@@ -1,36 +1,69 @@
-let currentProduct = {};
+const modal = document.getElementById("productModal");
+const modalImg = document.getElementById("modalImg");
+const modalTitle = document.getElementById("modalTitle");
+const modalPrice = document.getElementById("modalPrice");
+const modalDesc = document.getElementById("modalDesc");
 
-function openModal(title, desc, price, imgSrc) {
-  currentProduct = { title, desc, price, imgSrc };
-  document.getElementById("modalTitle").innerText = title;
-  document.getElementById("modalDesc").innerText = desc;
-  document.getElementById("modalPrice").innerText = "$" + price.toFixed(2);
-  document.getElementById("modalImg").src = imgSrc;
-  document.getElementById("productModal").style.display = "flex";
+let selectedProduct = null;
+
+function openModal(title, desc, price, image) {
+  modal.style.display = "flex";
+  modalImg.src = image;
+  modalTitle.textContent = title;
+  modalPrice.textContent = `₱${parseFloat(price).toFixed(2)}`;
+  modalDesc.textContent = desc;
+
+  selectedProduct = { title, desc, price: parseFloat(price), image };
 }
 
 function closeModal() {
-  document.getElementById("productModal").style.display = "none";
+  modal.style.display = "none";
 }
 
+window.onclick = function (event) {
+  if (event.target === modal) {
+    closeModal();
+  }
+};
 
-function addToCart() {
+function handleAddToCart() {
+  const loggedIn = document.body.dataset.loggedin === "true";
+
+  if (!loggedIn) {
+    const loginModal = document.getElementById("accountModal");
+    if (loginModal) loginModal.style.display = "block";
+    closeModal();
+    return;
+  }
+
+  if (!selectedProduct) return;
+
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const existing = cart.find(item => item.title === currentProduct.title);
 
+  const existing = cart.find(item => item.title === selectedProduct.title);
   if (existing) {
     existing.quantity += 1;
   } else {
-    currentProduct.quantity = 1;
-    cart.push(currentProduct);
+    cart.push({
+      title: selectedProduct.title,
+      desc: selectedProduct.desc,
+      price: selectedProduct.price,
+      imgSrc: selectedProduct.image,
+      quantity: 1
+    });
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
-  alert(`${currentProduct.title} added to your cart!`);
-  closeModal();
+
+  setTimeout(() => {
+    alert(`${selectedProduct.title} has been added to your cart.`);
+  }, 200);
+  
 }
 
-window.onclick = function(event) {
-  const modal = document.getElementById("productModal");
-  if (event.target === modal) closeModal();
-};
+function handleBuyNow() {
+  handleAddToCart();
+  setTimeout(() => {
+    window.location.href = "checkout.php";
+  }, 300);
+}
