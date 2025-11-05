@@ -19,13 +19,14 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
 
   <header>
     <h1>⚙️ Builder's Corner — Admin Dashboard</h1>
-    <p>Welcome, <?php echo $_SESSION['username']; ?> | <a href="logout.php">Logout</a></p>
+    <p class="welcome">Welcome, <?php echo $_SESSION['username']; ?> | <a href="logout.php">Logout</a></p>
   </header>
+  
+  <button class="user-manage" type="submit"><a href="users.php">Manage users</a></button>
 
   <div class="dashboard-container">
     <div class="card">
 <p>Track user and sales performance (Coming Soon).</p>
-      
     </div>
   </div>
 

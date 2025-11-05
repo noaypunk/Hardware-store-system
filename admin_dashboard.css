@@ -57,6 +57,11 @@ button {
   transition: 0.3s;
 }
 
+.user-manage a{
+  text-decoration: none;
+  font-weight: 600;
+}
+
 button:hover {
   transform: scale(1.05);
 }

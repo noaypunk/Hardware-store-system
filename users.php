@@ -19,7 +19,7 @@ $result = $conn->query("SELECT * FROM users");
 <body>
   <h2>👥 User Management</h2>
   <a href="add_user.php" class="btn">➕ Add User</a>
-  <a href="index.php" class="btn">🏠 Back to Home</a>
+  <a href="admin_dashboard.php" class="btn">🏠 Back to Home</a>
 
   <table>
     <tr>
