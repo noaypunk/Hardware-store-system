@@ -17,9 +17,9 @@ $result = $conn->query("SELECT * FROM users");
   <link rel="stylesheet" href="user_crud.css">
 </head>
 <body>
-  <h2>👥 User Management</h2>
-  <a href="add_user.php" class="btn">➕ Add User</a>
-  <a href="admin_dashboard.php" class="btn">🏠 Back to Home</a>
+  <h2> -------------- USER MANAGEMENT -------------- </h2>
+  <a href="add_user.php" class="btn"> Add User</a>
+  <a href="admin_dashboard.php" class="btn"> Admin Dashboard</a>
 
   <table>
     <tr>
@@ -38,10 +38,15 @@ $result = $conn->query("SELECT * FROM users");
         <td><?php echo htmlspecialchars($row['user_type']); ?></td>
         <td>
           <a href="edit_user.php?id=<?php echo $row['id']; ?>">✏️ Edit</a> |
-          <a href="delete_user.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Delete this user?')">🗑️ Delete</a>
+          <a href="delete_user.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Delete this user?')"> Delete</a>
         </td>
       </tr>
     <?php } ?>
   </table>
+
+  <footer>
+    (2025) Builder's Corner | Hardware Store Management System
+  </footer>
+  
 </body>
 </html>

@@ -2,16 +2,23 @@
 include('db_connect.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $full_name = $_POST['full_name'];
+  $mobile = $_POST['mobile'];
   $username = $_POST['username'];
-  $email = $_POST['email'];
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
   $user_type = $_POST['user_type'];
 
-  $stmt = $conn->prepare("INSERT INTO users (username, email, password, user_type) VALUES (?, ?, ?, ?)");
-  $stmt->bind_param("ssss", $username, $email, $password, $user_type);
-  $stmt->execute();
+  $stmt = $conn->prepare("INSERT INTO users (full_name, mobile, username, password, user_type) VALUES (?, ?, ?, ?, ?)");
+  $stmt->bind_param("sssss", $full_name, $mobile, $username, $password, $user_type);
 
-  echo "<script>alert('✅ User added successfully!'); window.location='users.php';</script>";
+  if ($stmt->execute()) {
+    echo "<script>alert('New Customer added successfully!'); window.location='users.php';</script>";
+  } else {
+    echo "<script>alert('Error: " . $stmt->error . "');</script>";
+  }
+
+  $stmt->close();
+  $conn->close();
   exit();
 }
 ?>
@@ -23,17 +30,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="user_crud.css">
 </head>
 <body>
-  <h2>➕ Add User</h2>
+  <h2>------- Add Customer -------</h2>
   <form method="POST">
+    <input type="text" name="full_name" placeholder="Full Name" required><br>
+    <input type="text" name="mobile" placeholder="Mobile Number" required><br>
     <input type="text" name="username" placeholder="Username" required><br>
-    <input type="email" name="email" placeholder="Email" required><br>
     <input type="password" name="password" placeholder="Password" required><br>
     <select name="user_type" required>
-      <option value="customer">Customer</option>
-      <option value="admin">Admin</option>
+      <option value="Guest">Register as</option>
+      <option value="Guest">Customer</option>
+      <option value="Contractor">Contractor</option>
     </select><br>
-    <button type="submit">💾 Save</button>
-    <a href="users.php">Cancel</a>
+
+    <button type="submit"> Add User</button>
+    <a class="btn" href="users.php">Cancel</a>
   </form>
 </body>
 </html>

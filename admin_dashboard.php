@@ -11,18 +11,18 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>⚙️ Admin Dashboard | Builder's Corner</title>
+  <title> Admin Dashboard | Builder's Corner</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="admin_dashboard.css">
 </head>
 <body>
 
   <header>
-    <h1>⚙️ Builder's Corner — Admin Dashboard</h1>
+    <h1> Builder's Corner — Admin Dashboard</h1>
     <p class="welcome">Welcome, <?php echo $_SESSION['username']; ?> | <a href="logout.php">Logout</a></p>
   </header>
   
-  <button class="user-manage" type="submit"><a href="users.php">Manage users</a></button>
+  <button class="user-manage" type="submit"><a href="users.php">MANAGE USERS</a></button>
 
   <div class="dashboard-container">
     <div class="card">
@@ -31,7 +31,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
   </div>
 
   <form action="add_product.php" method="POST" enctype="multipart/form-data">
-    <h2>🛠 Add New Product</h2>
+    <h2> Add New Product</h2>
     <input type="text" name="title" placeholder="Product Name" required>
     <input type="text" name="description" placeholder="Description" required>
     <input type="number" name="price" placeholder="Price" required>
@@ -39,7 +39,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
     <button type="submit">Add Product</button>
   </form>
 
-  <h2>📦 Manage Products</h2>
+  <h2> Manage Products </h2>
   <table>
     <tr>
       <th>ID</th>
@@ -61,8 +61,8 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
         <td>₱{$row['price']}</td>
         <td><img src='{$row['image_file']}' width='80' style='border-radius:6px;'></td>
         <td>
-          <a href='edit_product.php?id={$row['id']}'>✏️ Edit</a> |
-          <a href='delete_product.php?id={$row['id']}'>🗑 Delete</a>
+          <a href='edit_product.php?id={$row['id']}'> ✏️ Edit </a> |
+          <a href='delete_product.php?id={$row['id']}'> 🗑 Delete </a>
         </td>
       </tr>
       ";
@@ -71,7 +71,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
   </table>
 
   <footer>
-    © 2025 Builder’s Corner | Futuristic Admin Panel
+    (2025) Builder's Corner | Hardware Store Management System
   </footer>
 </body>
 </html>

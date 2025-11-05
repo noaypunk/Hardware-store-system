@@ -50,16 +50,20 @@ input {
 }
 
 button {
-  background: linear-gradient(90deg, #00ffff, #ff00c3);
+  background: linear-gradient(90deg, #dee9e9, #e2dbe0);
   color: #000;
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
 }
-
+.user-manage{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 .user-manage a{
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
+  padding: 30px 10px 30px 10px;
 }
 
 button:hover {
