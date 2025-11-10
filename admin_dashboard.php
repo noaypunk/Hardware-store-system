@@ -21,14 +21,14 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
     <h1> Builder's Corner — Admin Dashboard</h1>
     <p class="welcome">Welcome, <?php echo $_SESSION['username']; ?> | <a href="logout.php">Logout</a></p>
   </header>
-  
-  <button class="user-manage" type="submit"><a href="users.php">MANAGE USERS</a></button>
 
   <div class="dashboard-container">
     <div class="card">
-<p>Track user and sales performance (Coming Soon).</p>
+<p>Track user and sales performance (Coming Soon)</p>
     </div>
   </div>
+
+  <button class="user-manage" type="submit"><a href="users.php">MANAGE USERS</a></button>
 
   <form action="add_product.php" method="POST" enctype="multipart/form-data">
     <h2> Add New Product</h2>
@@ -61,8 +61,8 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
         <td>₱{$row['price']}</td>
         <td><img src='{$row['image_file']}' width='80' style='border-radius:6px;'></td>
         <td>
-          <a href='edit_product.php?id={$row['id']}'> ✏️ Edit </a> |
-          <a href='delete_product.php?id={$row['id']}'> 🗑 Delete </a>
+          <a href='edit_product.php?id={$row['id']}'> <-- EDIT </a> |
+          <a href='delete_product.php?id={$row['id']}'> DELETE --> </a>
         </td>
       </tr>
       ";

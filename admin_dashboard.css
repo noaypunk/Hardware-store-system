@@ -52,7 +52,7 @@ input {
 button {
   background: linear-gradient(90deg, #dee9e9, #e2dbe0);
   color: #000;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -62,7 +62,7 @@ button {
 }
 .user-manage a{
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 900;
   padding: 30px 10px 30px 10px;
 }
 

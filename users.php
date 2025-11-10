@@ -37,7 +37,7 @@ $result = $conn->query("SELECT * FROM users");
         <td><?php echo htmlspecialchars($row['mobile']); ?></td>
         <td><?php echo htmlspecialchars($row['user_type']); ?></td>
         <td>
-          <a href="edit_user.php?id=<?php echo $row['id']; ?>">✏️ Edit</a> |
+          <a href="edit_user.php?id=<?php echo $row['id']; ?>"> Edit</a> |
           <a href="delete_user.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Delete this user?')"> Delete</a>
         </td>
       </tr>
