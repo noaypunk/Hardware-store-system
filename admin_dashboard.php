@@ -28,12 +28,12 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
     </div>
   </div>
 
-  <button class="user-manage" type="submit"><a href="users.php">MANAGE USERS</a></button>
+  <button class="user-manage" type="submit"><a href="users.php">MANAGE USERS</a></button><br>
 
   <form action="add_product.php" method="POST" enctype="multipart/form-data">
     <h2> Add New Product</h2>
     <input type="text" name="title" placeholder="Product Name" required>
-    <input type="text" name="description" placeholder="Description" required>
+    <input type="text" name="details" placeholder="Description" required>
     <input type="number" name="price" placeholder="Price" required>
     <input type="file" name="image_file" accept="image/*" required>
     <button type="submit">Add Product</button>
@@ -51,18 +51,18 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
     </tr>
 
     <?php
-    $result = $conn->query("SELECT * FROM products");
+    $result = $conn->query("SELECT * FROM material");
     while($row = $result->fetch_assoc()) {
       echo "
       <tr>
-        <td>{$row['id']}</td>
+        <td>{$row['materialID']}</td>
         <td>{$row['title']}</td>
-        <td>{$row['description']}</td>
+        <td>{$row['details']}</td>
         <td>₱{$row['price']}</td>
         <td><img src='{$row['image_file']}' width='80' style='border-radius:6px;'></td>
         <td>
-          <a href='edit_product.php?id={$row['id']}'> <-- EDIT </a> |
-          <a href='delete_product.php?id={$row['id']}'> DELETE --> </a>
+          <a href='edit_product.php?id={$row['materialID']}'> <-- EDIT </a> |
+          <a href='delete_product.php?id={$row['materialID']}'> DELETE --> </a>
         </td>
       </tr>
       ";
@@ -71,7 +71,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
   </table>
 
   <footer>
-    (2025) Builder's Corner | Hardware Store Management System
+    &copy; (2025) Builder's Corner | Hardware Store Management System
   </footer>
 </body>
 </html>

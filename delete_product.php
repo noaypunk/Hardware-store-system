@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
 }
 
 $id = $_GET['id'];
-$conn->query("DELETE FROM products WHERE id=$id");
+$conn->query("DELETE FROM material WHERE materialID=$id");
 
-echo "<script>alert('🗑️ Product deleted successfully!'); window.location='admin_dashboard.php';</script>";
+echo "<script>alert('Product deleted successfully!'); window.location='admin_dashboard.php';</script>";
 ?>

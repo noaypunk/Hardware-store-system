@@ -14,7 +14,6 @@ include('db_connect.php');
 </head>
 
 <body>
-
   <nav>
     <a href="#" id="accountBtn">
       <?php echo isset($_SESSION['username']) ? "": "My Account"; ?>
@@ -27,11 +26,11 @@ include('db_connect.php');
     <?php endif; ?>
   </nav>
 
-  <?php include('account_modal.php'); ?>
+    <?php include('account_modal.php'); ?>
 
-  <footer>
-    &copy; 2025 Hardware Management System
-  </footer>
+<footer>
+   &copy; (2025) Builder's Corner | Hardware Store Management System
+</footer>
   
   <script src="index.js"></script>
 </body>

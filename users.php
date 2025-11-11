@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
   exit();
 }
 
-$result = $conn->query("SELECT * FROM users");
+$result = $conn->query("SELECT * FROM customer");
 ?>
 
 <!DOCTYPE html>
@@ -25,20 +25,20 @@ $result = $conn->query("SELECT * FROM users");
     <tr>
       <th>ID</th>
       <th>Username</th>
-      <th>Email</th>
+      <th>Mobile Number</th>
       <th>User Type</th>
       <th>Actions</th>
     </tr>
 
     <?php while ($row = $result->fetch_assoc()) { ?>
       <tr>
-        <td><?php echo $row['id']; ?></td>
+        <td><?php echo $row['customerID']; ?></td>
         <td><?php echo htmlspecialchars($row['username']); ?></td>
         <td><?php echo htmlspecialchars($row['mobile']); ?></td>
         <td><?php echo htmlspecialchars($row['user_type']); ?></td>
         <td>
-          <a href="edit_user.php?id=<?php echo $row['id']; ?>"> Edit</a> |
-          <a href="delete_user.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Delete this user?')"> Delete</a>
+          <a href="edit_user.php?id=<?php echo $row['customerID']; ?>"> Edit</a> |
+          <a href="delete_user.php?id=<?php echo $row['customerID']; ?>" onclick="return confirm('Delete this user?')"> Delete</a>
         </td>
       </tr>
     <?php } ?>

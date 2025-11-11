@@ -3,9 +3,8 @@ include('db_connect.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_POST['title'];
-    $description = $_POST['description'];
+    $details = $_POST['details'];
     $price = $_POST['price'];
-
     $target_dir = "uploads/";
     if (!file_exists($target_dir)) {
         mkdir($target_dir, 0777, true);
@@ -24,14 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($uploadOk == 1) {
         if (move_uploaded_file($_FILES["image_file"]["tmp_name"], $target_file)) {
          
-            $stmt = $conn->prepare("INSERT INTO products (title, description, price, image_file) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssds", $title, $description, $price, $target_file);
+            $stmt = $conn->prepare("INSERT INTO material (title, details, price, image_file) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssds", $title, $details, $price, $target_file);
             $stmt->execute();
-            echo "✅ Product added successfully!";
-            header("Location: admin_dashboard.php");
+            echo "<script>alert('Product added successfully!'); window.location='admin_dashboard.php';</script>";
             exit();
         } else {
-            echo "❌ Sorry, there was an error uploading your file.";
+            echo "Sorry, there was an error uploading your file.";
         }
     }
 }

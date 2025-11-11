@@ -2,7 +2,7 @@
 include('db_connect.php');
 
 $id = $_GET['id'];
-$result = $conn->query("SELECT * FROM users WHERE id=$id");
+$result = $conn->query("SELECT * FROM customer WHERE customerID=$id");
 $user = $result->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,17 +13,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if (!empty($_POST['password'])) {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $stmt = $conn->prepare("UPDATE users SET full_name=?, mobile=?, username=?, password=?, user_type=? WHERE id=?");
+    $stmt = $conn->prepare("UPDATE customer SET full_name=?, mobile=?, username=?, password=?, user_type=? WHERE customerID=?");
     $stmt->bind_param("sssssi", $full_name, $mobile, $username, $password, $user_type, $id);
   } else {
-    $stmt = $conn->prepare("UPDATE users SET full_name=?, mobile=?, username=?, user_type=? WHERE id=?");
+    $stmt = $conn->prepare("UPDATE customer SET full_name=?, mobile=?, username=?, user_type=? WHERE customerID=?");
     $stmt->bind_param("ssssi", $full_name, $mobile, $username, $user_type, $id);
   }
 
   if ($stmt->execute()) {
-    echo "<script>alert('✅ User data updated successfully!'); window.location='users.php';</script>";
+    echo "<script>alert('User data updated successfully!'); window.location='users.php';</script>";
   } else {
-    echo "<script>alert('❌ Error updating user: " . $stmt->error . "');</script>";
+    echo "<script>alert('Error updating user: " . $stmt->error . "');</script>";
   }
 
   $stmt->close();
@@ -48,10 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <select name="user_type" required>
       <option value="Guest" <?php if($user['user_type']=='Guest') echo 'selected'; ?>>Customer</option>
       <option value="Contractor" <?php if($user['user_type']=='Contractor') echo 'selected'; ?>>Contractor</option>
-      <option value="admin" <?php if($user['user_type']=='admin') echo 'selected'; ?>>Admin</option>
     </select><br>
     <button type="submit">Save Changes</button>
     <a class="btn" href="users.php">Cancel</a>
   </form>
+<br><br>
+<footer>
+  &copy; (2025) Builder's Corner | Hardware Store Management System
+</footer>
+
 </body>
 </html>

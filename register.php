@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
         die("Database connection failed: " . mysqli_connect_error());
     }
 
-    $checkUser = $conn->prepare("SELECT username FROM users WHERE username = ?");
+    $checkUser = $conn->prepare("SELECT username FROM customer WHERE username = ?");
     $checkUser->bind_param("s", $username);
     $checkUser->execute();
     $result = $checkUser->get_result();
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $conn->prepare("INSERT INTO users (full_name, mobile, user_type, username, password) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO customer (full_name, mobile, user_type, username, password) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("sssss", $full_name, $mobile, $user_type, $username, $hashedPassword);
 
     if ($stmt->execute()) {

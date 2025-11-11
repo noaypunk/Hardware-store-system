@@ -28,7 +28,7 @@ session_start();
   <section class="gallery">
     <div class="gallery-container">
       <?php
-        $query = "SELECT * FROM products";
+        $query = "SELECT * FROM material";
         $result = $conn->query($query);
 
         if ($result->num_rows > 0) {

@@ -6,7 +6,7 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
+    $query = "SELECT * FROM customer WHERE username = '$username' LIMIT 1";
     $result = mysqli_query($conn, $query);
 
     if ($result && mysqli_num_rows($result) > 0) {
@@ -16,7 +16,7 @@ if (isset($_POST['login'])) {
             
             $_SESSION['username'] = $user['username'];
             $_SESSION['user_type'] = $user['user_type'];
-            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_id'] = $user['customerID'];
 
             if ($user['user_type'] === 'admin') {
                 header("Location: admin_dashboard.php");

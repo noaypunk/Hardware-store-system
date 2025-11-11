@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
   $user_type = $_POST['user_type'];
 
-  $stmt = $conn->prepare("INSERT INTO users (full_name, mobile, username, password, user_type) VALUES (?, ?, ?, ?, ?)");
+  $stmt = $conn->prepare("INSERT INTO customer (full_name, mobile, username, password, user_type) VALUES (?, ?, ?, ?, ?)");
   $stmt->bind_param("sssss", $full_name, $mobile, $username, $password, $user_type);
 
   if ($stmt->execute()) {
@@ -45,5 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit"> Add User</button>
     <a class="btn" href="users.php">Cancel</a>
   </form>
+
+  <br><br>
+<footer>
+  &copy; (2025) Builder's Corner | Hardware Store Management System
+</footer>
+
 </body>
 </html>
