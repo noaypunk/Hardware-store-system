@@ -1,36 +1,44 @@
 <?php
 session_start();
-include('db_connect.php');
+include 'db_connect.php';
 
 if (isset($_POST['login'])) {
-    $username = $_POST['username'];
+    $username = $conn->real_escape_string($_POST['username']);
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM customer WHERE username = '$username' LIMIT 1";
-    $result = mysqli_query($conn, $query);
+    $sql = "SELECT * FROM customer WHERE username = '$username'";
+    $result = $conn->query($sql);
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $user = mysqli_fetch_assoc($result);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $stored_password = $row['password'];
 
-        if ($password === $user['password'] || password_verify($password, $user['password'])) {
-            
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['user_type'] = $user['user_type'];
-            $_SESSION['user_id'] = $user['customerID'];
-
-            if ($user['user_type'] === 'admin') {
-                header("Location: admin_dashboard.php");
-                exit();
-            } else {
-                header("Location: index.php");
-                exit();
-            }
-
-        } else {
-            echo "<script>alert('Invalid password'); window.location.href='index.php';</script>";
+        if ($password === $stored_password) {
+            loginSuccess($row);
+        } 
+        elseif (password_verify($password, $stored_password)) {
+            loginSuccess($row);
+        } 
+        else {
+            echo "<script>alert('Invalid Password!'); window.location.href='index.php';</script>";
         }
     } else {
-        echo "<script>alert('User not found'); window.location.href='index.php';</script>";
+        echo "<script>alert('Username not found!'); window.location.href='index.php';</script>";
+    }
+}
+
+function loginSuccess($userRow) {
+    $_SESSION['user_id'] = $userRow['customerID'];
+    $_SESSION['username'] = $userRow['username'];
+    $_SESSION['user_type'] = $userRow['user_type'];
+
+    if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'admin') {
+  header("Location: admin_dashboard.php");
+  exit();
+}
+else{
+    echo "<script>alert('Login Successful!'); window.location.href='gallery.php';</script>";
+    exit();
     }
 }
 ?>
