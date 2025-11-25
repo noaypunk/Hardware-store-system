@@ -50,6 +50,8 @@ $result = $conn->query($sql);
                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#accountModal">My Account</a>
              </li>
           <?php endif; ?>
+
+          <li class="nav-item"><a class="nav-link" href="myProfile.php">My Profile</a></li>
         </ul>
 
         <div class="nav-icons d-flex align-items-center">
