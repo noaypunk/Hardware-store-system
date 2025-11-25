@@ -5,6 +5,7 @@ include('db_connect.php');
 // limit 5 products to match the single row layout in the design
 $sql = "SELECT materialID, title, price, image_file FROM material LIMIT 5";
 $result = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +22,7 @@ $result = $conn->query($sql);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <link rel="stylesheet" href="index.css">
-  
+
 </head>
 
 <body>
@@ -35,7 +36,8 @@ $result = $conn->query($sql);
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-      
+
+      <!-- T1 navigation bar section -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
@@ -51,16 +53,27 @@ $result = $conn->query($sql);
              </li>
           <?php endif; ?>
         </ul>
+<!-- T1 ends here --> 
 
-        <div class="nav-icons d-flex align-items-center">
-            <button class="btn-icon"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button class="btn-icon position-relative">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                    <span class="visually-hidden">New alerts</span>
-                </span>
-            </button>
-        </div>
+              <!-- T2 searchbox & add to cart section -->
+         <div class="ms-auto nav-icons d-flex align-items-center">
+
+        <!--  Magnifying Glass Button (opens modal) -->
+        <a><button class="btn-icon" data-bs-toggle="modal" data-bs-target="#productSearchModal">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button></a>
+
+        <!-- Cart Icon -->
+        <button class="btn-icon position-relative">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+            </span>
+        </button>
+
+    </div>
+<!-- T2 ends here -->
+
       </div>
     </div>
   </nav>
@@ -139,13 +152,26 @@ $result = $conn->query($sql);
       </div>
   </div>
 
-  <?php include('account_modal.php'); ?>
+ 
 
   <footer>
      &copy; 2025 Builder's Corner | Hardware Store Management System
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php include 'modal_product_search.php'; ?>
+
+<script>
+document.getElementById("searchBtn").addEventListener("click", function() {
+    let searchValue = document.getElementById("productSearchInput").value;
+
+    fetch("search_api.php?search=" + searchValue)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("searchResults").innerHTML = data;
+        });
+});
+</script>
 
 </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
