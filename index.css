@@ -115,6 +115,10 @@ body {
           font-size: 0.85rem;
           margin-left: 5px;
       }
+    .btn-icon {
+        position: relative;
+        z-index: 9999;
+    }
 
       .btn-add-cart {
           background-color: #0078d7;
@@ -143,3 +147,4 @@ body {
           border-top: 1px solid #eee;
           color: #666;
       }
+      
