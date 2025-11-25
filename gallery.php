@@ -46,7 +46,7 @@ if (isset($_POST['add_to_cart']) && isset($_SESSION['user_id'])) {
     <h2 class="text-center mb-4">Hardware Materials</h2>
     
     <div class="text-end mb-3">
-        <a href="index.php" class="btn btn-primary">Home</a>
+        <a href="landing.php" class="btn btn-primary">Home</a>
         <a href="checkout.php" class="btn btn-primary position-relative">
             Go to Cart (Checkout)
             <?php if(isset($_SESSION['cart'])): ?>

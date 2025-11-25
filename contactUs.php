@@ -1,76 +1,114 @@
+<?php
+session_start();
+include('db_connect.php');
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Builder's Corner</title>
+  
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="gui.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <style>
+      body {
+          font-family: 'Poppins', sans-serif;
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+      }
+      .navbar-brand {
+          font-weight: 600;
+          color: #0078d7 !important;
+      }
+      .nav-link {
+          font-weight: 500;
+      }
+      .hero-section {
+          background: #f8f9fa;
+          flex: 1; 
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+      }
+      footer {
+          background-color: #343a40;
+          color: white;
+          padding: 15px 0;
+          text-align: center;
+          margin-top: auto;
+      }
+  </style>
 </head>
+
 <body>
 
-  <div class="banner">
-    <img src="resources/hardware-banner.jpg" alt="Hardware Store Banner">
-  </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="index.php">Builder's Corner</a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.php">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.php">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contactUs.php">Contact Us</a>
+          </li>
+          
 
-
-  <nav>
-    <a href="#" id="accountBtn">My Account</a>
-    <a href="index.php">Home</a>
-    <a href="gallery.php">Shop</a>
-    <a href="contactUs.php" class="active">Contact Us</a>
+          <?php if(isset($_SESSION['username'])): ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="logout.php">Sign Out</a></li>
+                </ul>
+            </li>
+          <?php else: ?>
+            <li class="nav-item">
+                <a class="nav-link text-primary fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#accountModal">
+                    My Account
+                </a>
+            </li>
+          <?php endif; ?>
+        </ul>
+      </div>
+    </div>
   </nav>
 
-
-  <div class="content">
-<div class="content-text">
-      <h1>Builder's Corner</h1>
-      <p>A hardware that manages your inventory, suppliers, and purchase orders efficiently.</p>
-    </div>
+  <div class="hero-section">
+      <div class="container">
+          <h1 class="display-4">Welcome to Builder's Corner</h1>
+          <p class="lead">Your one-stop shop for all hardware needs.</p>
+          <a href="gallery.php" class="btn btn-primary btn-lg mt-3">Browse Shop</a>
+      </div>
   </div>
 
+  <?php include('account_modal.php'); ?>
 
   <footer>
-    &copy; 2025 Hardware Management System | Developed by Boss Ryan
+     &copy; 2025 Builder's Corner | Hardware Store Management System
   </footer>
 
- <div id="accountModal" class="modal">
-    <div class="modal-content">
-      <span class="close" id="closeAccount">&times;</span>
-      <div class="tab-buttons">
-        <button class="tab active" id="loginTab">Login</button>
-        <button class="tab" id="registerTab">Register</button>
-      </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-      <form id="loginForm" class="form-section active">
-        <h2>Login</h2>
-        <label>Username</label>
-        <input type="text" placeholder="Enter username" required>
-        <label>Password</label>
-        <input type="password" placeholder="Enter password" required>
-        <button type="submit">Login</button>
-      </form>
-
-      <form id="registerForm" class="form-section">
-        <h2>Register</h2>
-        <label>Full Name</label>
-          <input type="text" placeholder="Enter full name" required>
-        <label>Mobile number</label>
-          <input type="number" placeholder="Enter mobile number" required>
-          <select id="userType" name="userType" required>
-            <option value="">---- Register As ----</option>
-            <option value="tools">Guest individual</option>
-            <option value="electrical">Contractor</option>
-          </select>
-        <label>Username</label>
-          <input type="text" placeholder="Create username" required>
-        <label>Password</label>
-          <input type="password" placeholder="Create password" required>
-        <button type="submit">Register</button>
-      </form>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
 </body>
 </html>

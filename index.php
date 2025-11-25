@@ -2,7 +2,9 @@
 session_start();
 include('db_connect.php');
 
-
+// limit 5 products to match the single row layout in the design
+$sql = "SELECT materialID, title, price, image_file FROM material LIMIT 5";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -12,93 +14,128 @@ include('db_connect.php');
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Builder's Corner</title>
   
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <style>
-      body {
-          font-family: 'Poppins', sans-serif;
-          display: flex;
-          flex-direction: column;
-          min-height: 100vh;
-      }
-      .navbar-brand {
-          font-weight: 600;
-          color: #0078d7 !important;
-      }
-      .nav-link {
-          font-weight: 500;
-      }
-      .hero-section {
-          background: #f8f9fa;
-          flex: 1; 
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-      }
-      footer {
-          background-color: #343a40;
-          color: white;
-          padding: 15px 0;
-          text-align: center;
-          margin-top: auto;
-      }
-  </style>
+  <link rel="stylesheet" href="index.css">
+  
 </head>
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
     <div class="container">
-      <a class="navbar-brand" href="index.php">Builder's Corner</a>
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="index.php">
+        <i class="fa-solid fa-hammer"></i> Builder's Corner
+      </a>
+       
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.php">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="gallery.php">Shop</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contactUs.html">Contact Us</a>
-          </li>
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.php">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.php">Shop</a></li>
+          <li class="nav-item"><a class="nav-link" href="contactUs.php">Contact</a></li>
           
-
           <?php if(isset($_SESSION['username'])): ?>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                    Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="logout.php">Sign Out</a></li>
-                </ul>
-            </li>
+             <li class="nav-item"><a class="nav-link" href="#">My Account</a></li>
           <?php else: ?>
-            <li class="nav-item">
-                <a class="nav-link text-primary fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#accountModal">
-                    My Account
-                </a>
-            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#accountModal">My Account</a>
+             </li>
           <?php endif; ?>
         </ul>
+
+        <div class="nav-icons d-flex align-items-center">
+            <button class="btn-icon"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button class="btn-icon position-relative">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                </span>
+            </button>
+        </div>
       </div>
     </div>
   </nav>
 
-  <div class="hero-section">
-      <div class="container">
-          <h1 class="display-4">Welcome to Builder's Corner</h1>
-          <p class="lead">Your one-stop shop for all hardware needs.</p>
-          <a href="gallery.php" class="btn btn-primary btn-lg mt-3">Browse Shop</a>
+  <div class="container mt-5 mb-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 style="font-weight: 800; color: #222;">Featured Products</h2>
+          <a href="gallery.php" class="view-all-link">View All &rarr;</a>
+      </div>
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+          
+          <?php 
+          if ($result && $result->num_rows > 0):
+              while($row = $result->fetch_assoc()): 
+                
+             
+                $current_price = $row['price'];
+                $fake_old_price = $current_price * 1.3; 
+                
+                $discount_percent = round((($fake_old_price - $current_price) / $fake_old_price) * 100);
+                
+                $img_path = !empty($row['image_file']) ? $row['image_file'] : 'resources/default.jpg';
+          ?>
+          
+          <div class="col">
+              <div class="card product-card h-100">
+                  <span class="badge-discount">-<?php echo $discount_percent; ?>%</span>
+                  
+                  <i class="fa-regular fa-heart wishlist-icon"></i>
+                  
+                  <img src="<?php echo htmlspecialchars($img_path); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($row['title']); ?>">
+                  
+                  <div class="card-body d-flex flex-column">
+                      <div>
+                          <span class="category-tag">Hardware</span>
+                      </div>
+                      
+                      <h5 class="product-title text-truncate" title="<?php echo htmlspecialchars($row['title']); ?>">
+                          <?php echo htmlspecialchars($row['title']); ?>
+                      </h5>
+                      
+                      <div class="stars">
+                          <i class="fa-solid fa-star"></i>
+                          <i class="fa-solid fa-star"></i>
+                          <i class="fa-solid fa-star"></i>
+                          <i class="fa-solid fa-star"></i>
+                          <i class="fa-solid fa-star-half-stroke"></i>
+                          <span class="review-count">(<?php echo rand(50, 200); ?>)</span>
+                      </div>
+                      
+                      <div class="mb-3">
+                          <span class="current-price">$<?php echo number_format($current_price, 2); ?></span>
+                          <span class="old-price">$<?php echo number_format($fake_old_price, 2); ?></span>
+                      </div>
+                      
+                      <form action="add_to_cart.php" method="POST" class="mt-auto">
+                          <input type="hidden" name="product_id" value="<?php echo $row['materialID']; ?>">
+                          <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($row['title']); ?>">
+                          <input type="hidden" name="product_price" value="<?php echo $row['price']; ?>">
+                          <button type="submit" class="btn btn-primary btn-add-cart">Add to Cart</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+
+          <?php 
+              endwhile; 
+          else: 
+          ?>
+            <div class="col-12">
+                <p class="text-center text-muted">No products found in the database.</p>
+            </div>
+          <?php endif; ?>
+
       </div>
   </div>
 
