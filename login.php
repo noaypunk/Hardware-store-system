@@ -37,7 +37,7 @@ function loginSuccess($userRow) {
   exit();
 }
 else{
-    echo "<script>alert('Login Successful!'); window.location.href='landing.php';</script>";
+    echo "<script>alert('Login Successful!'); window.location.href='index.php';</script>";
     exit();
     }
 }

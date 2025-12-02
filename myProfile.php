@@ -181,7 +181,7 @@ body {
 
                     <label class="form-label">User Type</label>
                     <select name="user_type" class="form-select mb-2" required>
-                        <option value="Customer" <?php echo ($user['user_type']=='Customer')?'selected':''; ?>>Customer</option>
+                        <option value="Guest" <?php echo ($user['user_type']=='Guest')?'selected':''; ?>>Guest</option>
                         <option value="Contractor" <?php echo ($user['user_type']=='Contractor')?'selected':''; ?>>Contractor</option>
                     </select>
 
