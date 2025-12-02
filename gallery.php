@@ -52,13 +52,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
       <ul class="navbar-nav mx-auto">
         <li class="nav-item"><a class="nav-link <?php if($current_page=='index.php') echo 'current'; ?>" href="index.php">Home</a></li>
         <li class="nav-item"><a class="nav-link <?php if($current_page=='gallery.php') echo 'current'; ?>" href="gallery.php">Shop</a></li>
-        <li class="nav-item"><a class="nav-link" href="myProfile.php">Supplier Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Delivery Logs</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" <?php if($current_page=='myProfile.php') echo 'current'; ?>" href="myProfile.php">User Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" <?php if($current_page=='delivery.php') echo 'current'; ?>" href="delivery.php">Delivery Logs</a></li>
+        <li class="nav-item"><a class="nav-link" <?php if($current_page=='project.php') echo 'current'; ?>" href="project.php">Projects</a></li>
         <li class="nav-item"><a class="nav-link <?php if($current_page=='contactUs.php') echo 'current'; ?>" href="contactUs.php">Contact</a></li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#accountModal">My Account</a>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#accountModal">My Account</a></li>
       </ul>
 
       <div class="ms-auto nav-icons d-flex align-items-center">
@@ -66,12 +64,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
         <button class="btn-icon position-relative">
+          <a href="checkout.php" class="position-relative">
           <i class="fa-solid fa-cart-shopping"></i>
           <?php if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
             <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
               <?php echo count($_SESSION['cart']); ?>
             </span>
           <?php endif; ?>
+          </a>
         </button>
       </div>
     </div>
